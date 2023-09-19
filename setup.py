@@ -280,6 +280,21 @@ _ext = Extension('VisualizationOutput', ['VisualizationOutput.pyx'], include_dir
                  runtime_library_dirs=library_dirs)
 extensions.append(_ext)
 
+_ext = Extension('PostProcessing_combine3d', ['PostProcessing/combine3d.pyx'], include_dirs=include_path,
+                 extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
+                 runtime_library_dirs=library_dirs)
+extensions.append(_ext)
+
+_ext = Extension('PostProcessing_combine3d_py', ['PostProcessing/combine3d.py'], include_dirs=include_path,
+                 extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
+                 runtime_library_dirs=library_dirs)
+extensions.append(_ext)
+
+_ext = Extension('PostProcessing', ['PostProcessing.pyx'], include_dirs=include_path,
+                 extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
+                 runtime_library_dirs=library_dirs)
+extensions.append(_ext)
+
 #Build RRTMG
 
 if shutil.which("csh"):
