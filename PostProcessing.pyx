@@ -5,9 +5,7 @@
 
 import os
 
-from PostProcessing_combine3d import to_3d
-from PostProcessing_combine3d_py import create_file
-from PostProcessing_combine3d_py import write_field
+from PostProcessing_combine3d_py import combine3d
 
 cdef class PostProcessing:
 
@@ -25,4 +23,4 @@ cdef class PostProcessing:
         self.gridsize = [namelist["grid"]["nx"], namelist["grid"]["ny"], namelist["grid"]["nz"]]
 
     cpdef combine3d(self):
-        print('TODO implement PostProcessing.combine3d')
+        combine3d(self.fields_dir, self.out_dir)
