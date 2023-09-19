@@ -24,27 +24,7 @@ def get_netcdf_include():
 def get_netcdf_prefix():
     return sp.check_output(['nc-config', '--prefix']).strip().decode()
 
-conda_root = os.environ.get('CONDA_DEFAULT_ENV')
-print(f'[setup.py] {conda_root=}')
-if conda_root:
-    # Compile flags for conda env (implemented on ch4 at IAC-ETHZ)
-    assert conda_root, "no active conda env"  # SR/TMP
-    conda_lib = conda_root + '/lib'
-    conda_include = conda_root + '/include'
-    library_dirs = [conda_lib]
-    #+library_dirs = os.environ['LD_LIBRARY_PATH'].split(':')
-    libraries = []
-    libraries.append('mpi')
-    libraries.append('gfortran')
-    extensions = []
-    extra_compile_args=[]
-    extra_compile_args+=['-std=c99', '-O3', '-march=native', '-Wno-unused',
-                         '-Wno-#warnings', '-Wno-maybe-uninitialized', '-Wno-cpp', '-Wno-array-bounds','-fPIC']
-    extra_objects=['./RRTMG/rrtmg_build/rrtmg_combined.o']
-    netcdf_include = conda_include
-    netcdf_lib = conda_lib
-    f_compiler = 'gfortran'
-elif sys.platform == 'darwin':
+if sys.platform == 'darwin':
     #Compile flags for MacOSX
     library_dirs = []
     libraries = []
